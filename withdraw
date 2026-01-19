@@ -1,0 +1,80 @@
+def get_withdraw():
+    while True:
+        try:
+            withdraw = int(input('how much do you want to withdraw: R$'))
+            if withdraw >= 5 :
+                return withdraw
+            else:
+                print('enter a valid value (value > 5)')
+        except ValueError:
+            print('enter a valid value (value > 5)')
+            
+def get_one_hundred(withdraw):
+    one_hundred = withdraw // 100
+    one_hundred_rest = withdraw % 100
+    if one_hundred > 0:
+        print(f'you will receive {one_hundred} banknotes with a value of R$100')
+    return one_hundred_rest
+    
+def get_fifty(one_hundred_rest):
+    fifty = one_hundred_rest // 50
+    fifty_rest = one_hundred_rest % 50
+    if fifty > 0:
+        print(f'you will receive {fifty} banknotes with a value of R$50')
+    return fifty_rest
+    
+def get_twenty(fifty_rest):
+    twenty = fifty_rest // 20
+    twenty_rest = fifty_rest % 20
+    if twenty > 0:
+        print(f'you will receive {twenty} banknotes with a value of R$20')
+    return twenty_rest
+
+def get_ten(twenty_rest):
+    ten = twenty_rest // 10
+    ten_rest = twenty_rest % 10
+    if ten_rest == 1 or ten_rest == 3:
+        ten = 0
+        ten_rest = twenty_rest
+    if ten > 0:
+        print(f'you will receive {ten} banknotes whit a value of R$10')
+    return ten_rest
+
+def get_five_two(ten_rest):
+    five = ten_rest // 5
+    five_rest = ten_rest % 5
+    if ten_rest == 11 or ten_rest == 13:
+        five = 1
+        print(f'you will receive {five} banknotes whit a value of R$5')
+        two = (ten_rest - 5) // 2
+        print(f'you will receive {two} banknotes with a value of R$2')
+     
+    else:   
+        if five_rest == 1 or five_rest == 3:
+            five = 0
+            two = ten_rest // 2
+            print(f'you will receive {two} banknotes with a value of R$2')
+
+        elif five_rest == 2 or five_rest == 4:
+            if five > 0:
+                print(f'you will receive {five} banknotes whit a value of R$5')
+            two = five_rest // 2
+            if two > 0:
+                print(f'you will receive {two} banknotes with a value of R$2')
+
+#start program:
+
+while True:
+    withdraw = get_withdraw()
+    one_hundred_rest = get_one_hundred(withdraw)
+    fifty_rest = get_fifty(one_hundred_rest)
+    twenty_rest = get_twenty(fifty_rest)
+    ten_rest = get_ten(twenty_rest)
+    get_five_two(ten_rest)
+    
+
+    repeat = input('do you want withdraw other value? (yes/no): ').strip()
+    while repeat.lower() not in ('yes' , 'no'):
+        repeat = input('enter a valid option (yes/no): ').strip()
+    if repeat == 'no':
+        break
